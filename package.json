@@ -1,0 +1,22 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enlivenaman/LoginNodeJSProject.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Aman Saxena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enlivenaman/LoginNodeJSProject/issues"
+  },
+  "homepage": "https://github.com/enlivenaman/LoginNodeJSProject#readme"
+}
