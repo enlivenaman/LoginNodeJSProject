@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <link href="/stylesheets/animate.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans:300,400,600" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 login-key">
+                    <img src="/favicon.ico" />
+                </div>
+
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-title">
+                        Admin Panel
+                    </div>
+
+                    <div class="col-lg-12 login-form">
+                        <div class=""></div>
+                        <form id="LoginForm">
+                            <div class="form-group">
+                                <label class="form-control-label">Email Address</label>
+                                <input type="text" name="emailaddress" id="emailaddress" placeholder="Enter Email Address" class="form-control" value=""
+                                />
+                            </div>
+                            <div class="form-group" id="pwd-div">
+                                <label class="form-control-label">Password</label>
+                                <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" value="" />
+                            </div>
+
+                            <div class="col-lg-12 loginbttm">
+                                <div class="col-lg-6 login-btm login-text errorMessage"></div>
+                                <div class="col-lg-6 login-btm login-button">
+                                    <button id="validate" onclick="return RTI.Login.ValidateUser()" type="button" class="btn btn-outline-primary">LOGIN</button>
+                                    <!-- Following button is for UserName and Password Flow, POST on Azure -->
+                                    <!--<button id="save" onclick="return RTI.Login.LoginUser()" type="button" class="btn btn-outline-primary">LOGIN</button>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/RTI.js"></script>
+    <script src="/javascripts/RTI.Login.js"></script>
+    <script>
+        $(function () {
+            RTI.Login.Init();
+        })
+    </script>
+</body>
+
+</html>

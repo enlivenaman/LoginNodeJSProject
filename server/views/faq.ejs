@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include partials/head %>
+</head>
+<body>
+    <div class="container-fluid">
+        <%- include partials/top-header %>
+        <div class="container-fluid main-container">
+            <div class="col-md-2 sidebar">
+                <%- include partials/side-navigation %>
+            </div>
+            <div class="col-md-10 content">
+                <!--Main Page Content-->
+
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            FAQ
+                        </div>
+                        <div class="panel-body">
+                            <form id="FQAForm" method="post" action="">
+                                <div class="row">
+                                    <input type="hidden" name="Id" id="Id" value="<%=faq.Id%>" />
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Page Title:</label>
+                                            <input type="text" name="PageTitle" id="PageTitle" placeholder="Enter Page Title" class="form-control" value="<%=faq.PageTitle%>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Page Heading:</label>
+                                            <input type="text" name="PageHeading" id="PageHeading" placeholder="Enter Page Heading" class="form-control" value="<%=faq.PageHeading%>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Page Content:</label>
+                                            <input type="text" name="PageContent" id="PageContent" placeholder="Enter Page Content" class="form-control" value="<%=faq.PageContent%>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <a id="SaveStaticPage" href="javascript:void(0)" class="btn btn-success btn-sm">Save </a>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <p class="successMessageFQA"></p>
+                                    <p class="errorMessageFQA"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            FAQ Question/Answer
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-container">
+                                        <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="faq-table">
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th>Question</th>
+                                                    <th>Answer</th>
+                                                    <th>Display Order</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var i=0; i < faq.FAQ.length ; i++) { %>
+                                                <tr id="row-<%= faq.FAQ[i].FAQId  %>" class="table-row">                                                    
+                                                    <td>
+                                                        <input type="hidden" name="id" value="<%= faq.FAQ[i].FAQId %>" />
+                                                        <input type="hidden" id="Id_<%= faq.FAQ[i].FAQId%>" value="<%= faq.FAQ[i].FAQId %>" />
+                                                        <input type="hidden" id="Question_<%= faq.FAQ[i].FAQId%>" value="<%= faq.FAQ[i].Question %>" />
+                                                        <input type="hidden" id="Answer_<%= faq.FAQ[i].FAQId%>" value="<%= faq.FAQ[i].Answer %>" />
+                                                        <input type="hidden" id="DisplayOrder_<%= faq.FAQ[i].FAQId%>" value="<%= faq.FAQ[i].DisplayOrder %>" />
+                                                        <%= faq.FAQ[i].Question %>
+                                                    </td>
+                                                    <td><%= faq.FAQ[i].Answer %></td>
+                                                    <td><%= faq.FAQ[i].DisplayOrder %></td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="ConfirmDeletePV"></div>
+
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Add/Edit FAQ Question/Answer</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="FQAQuestionForm" method="post" action="">
+                                                <div class="row">
+                                                    <input type="hidden" name="FAQId" id="FAQId" value="" />
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Question:</label>
+                                                            <input type="text" name="Question" id="Question" placeholder="Enter Question" class="form-control" value="" maxlength="200" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Answer:</label>
+                                                            <input type="text" name="Answer" id="Answer" placeholder="Enter Answer" class="form-control" value="" maxlength="200" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Display Order:</label>
+                                                            <input type="text" name="DisplayOrder" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" minlength="1" maxlength="2" id="DisplayOrder" placeholder="Enter Display Order" class="form-control" value="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <br />
+                                                    <p class="successMessage"></p>
+                                                    <p class="errorMessage"></p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="close" type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                            <a id="SaveFAQQuestion" href="javascript:void(0)" class="btn btn-success btn-sm">Save </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Main Page Content-->
+            <script src="../public/javascripts/RTI.FAQ.js"></script>
+        </div>
+    </div>
+
+    <%- include partials/footer-scripts %>
+
+    <script src="/javascripts/RTI.FAQ.js"></script>
+    <script>
+        $(function () {
+            RTI.FAQ.Init();
+        });
+    </script>
+</body>
+</html>
