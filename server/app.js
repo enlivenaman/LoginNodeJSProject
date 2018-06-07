@@ -115,6 +115,8 @@ app.use('/Logout', (req, res) => {
     res.redirect('/login');
 });
 
+var loginRoute = require("./adminroutes/loginRoute");
+app.use('/Login',loginRoute);
 
 /*
 Admin Route End

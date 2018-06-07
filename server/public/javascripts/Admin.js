@@ -1,7 +1,7 @@
 ﻿(function () {
-    if (window['RTI'] == null) {
+    if (window['Admin'] == null) {
         var _sm = {};
-        window['RTI'] = _sm;
+        window['Admin'] = _sm;
     }
 })();
 $(function () {

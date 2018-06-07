@@ -30,21 +30,19 @@
                         <div class=""></div>
                         <form id="LoginForm">
                             <div class="form-group">
-                                <label class="form-control-label">Email Address</label>
-                                <input type="text" name="emailaddress" id="emailaddress" placeholder="Enter Email Address" class="form-control" value=""
+                                <label class="form-control-label">Mobile Number</label>
+                                <input type="number" name="mobile" id="mobile" placeholder="Enter Mobile Number" class="form-control" value=""
                                 />
                             </div>
-                            <div class="form-group" id="pwd-div">
+                            <!-- <div class="form-group" id="pwd-div">
                                 <label class="form-control-label">Password</label>
                                 <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" value="" />
-                            </div>
+                            </div> -->
 
                             <div class="col-lg-12 loginbttm">
                                 <div class="col-lg-6 login-btm login-text errorMessage"></div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button id="validate" onclick="return RTI.Login.ValidateUser()" type="button" class="btn btn-outline-primary">LOGIN</button>
-                                    <!-- Following button is for UserName and Password Flow, POST on Azure -->
-                                    <!--<button id="save" onclick="return RTI.Login.LoginUser()" type="button" class="btn btn-outline-primary">LOGIN</button>-->
+                                    <button id="validate" onclick="return Admin.Login.ValidateUser()" type="button" class="btn btn-outline-primary">LOGIN</button>
                                 </div>
                             </div>
                         </form>
@@ -59,11 +57,11 @@
 
     <script src="/javascripts/jquery-2.2.4.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
-    <script src="/javascripts/RTI.js"></script>
-    <script src="/javascripts/RTI.Login.js"></script>
+    <script src="/javascripts/Admin.js"></script>
+    <script src="/javascripts/Admin.Login.js"></script>
     <script>
         $(function () {
-            RTI.Login.Init();
+            Admin.Login.Init();
         })
     </script>
 </body>
