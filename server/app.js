@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 var debug = require('debug');
 var express = require('express');
 var partials = require('express-partials');
@@ -31,7 +31,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 3600000
+        expires: 300000
     }
 }));
 
@@ -50,6 +50,12 @@ app.all('/api/*', function (req, res, next) {
         next();
     }
 });
+
+var getOtpRoute = require('./routes/getOtpRoute');
+app.use('/api/getOTP', getOtpRoute);
+
+var verifyOtpRoute = require('./routes/verifyOtpRoute');
+app.use('/api/verifyOtp',sessionChecker, verifyOtpRoute, destroySession);
 
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/v1/* will be checked for the token.
@@ -71,28 +77,33 @@ app.all('/api/*', function (req, res, next) {
 /*
 Admin Route start
 */
-var sessionChecker = (req, res, next) => {
 
-    if (req.session.user && req.cookies && req.cookies.user_sid) {
+function  sessionChecker  (req, res, next) {
+    var presentTime = Date.now();
+    console.log('present time %s',presentTime);
+    console.log('expires', req.session.cookie.expires);
+    if (req.cookies && req.cookies.user_sid) {
         next();
     } else {
-        var isAjaxRequest = req.xhr;
-        if (isAjaxRequest) {
-            var errors = [];
-            var error = { 'msg': 'UnAuthorized' };
-            errors.push(error);
+        var errors = [];
+        var error = { 'msg': 'UnAuthorized' };
+        errors.push(error);
 
-            res.status(401);
-            res.statusMessage = JSON.stringify(errors);
-            res.send({ message: errors });
-        }
-        else {
-            res.redirect('/Login');
-        }
-        next();
+        res.status(401);
+        res.statusMessage = JSON.stringify(errors);
+        res.send({ message: errors });
     }
 };
 
+function destroySession(req,res,next){
+    req.session.destroy(function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          res.redirect('/');
+        }
+      });
+}
 app.get('/', function (req, res) {
     res.redirect('/Login');
 });
@@ -115,8 +126,7 @@ app.use('/Logout', (req, res) => {
     res.redirect('/login');
 });
 
-var loginRoute = require("./adminroutes/loginRoute");
-app.use('/Login',loginRoute);
+
 
 /*
 Admin Route End
@@ -128,14 +138,6 @@ app.use(logErrors)
 //app.use(errorHandler)
 
 function logErrors(err, req, res, next) {
-    if (azureADConfig.EnableTracking) {
-        var errormessage = '';
-        try { errormessage = JSON.stringify(err); }
-        catch (e) { errormessage = err; }
-
-        let client = appInsights.defaultClient;
-        client.trackException({ exception: new Error(errormessage) });
-    }
     if (req.url.indexOf('/api') > -1) {
         err.status = err.status || 500;
         res.status(err.status).json({
@@ -158,7 +160,6 @@ function logErrors(err, req, res, next) {
 
 
 app.set('port', process.env.PORT || 3000);
-
 var server = app.listen(app.get('port'), function (req, res) {
-   
+
 });

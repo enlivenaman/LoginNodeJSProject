@@ -1,34 +1,28 @@
 ﻿// config for your database
 var dbConfig = {
-    "rtidev": {
-        user: 'campusdbadmin',
-        password: 'M<{[+[ULRK)zN}fz',
-        server: 'rticampusappdb.database.windows.net',
-        database: 'rticampusappdev',
+    "development": {
+        user: 'root',
+        password: 'password',
+        server: '127.0.0.1',
+        database: 'cuppingmumbai',
         options:
         {
-            encrypt: true
-        }
-    },
-    "development": {
-        user: 'sa',
-        password: 'infotech@1',
-        server: '127.0.0.1',
-        database: 'RTI_MVP_NEW'
-
+            encrypt: false
+        },
+        port: 3306
     },
     "test": {
-        user: 'sa',
-        password: 'rti@123',
-        server: '10.43.9.175',
-        database: 'RTI_MVP',
+        user: 'root',
+        password: 'password',
+        server: '127.0.0.1',
+        database: 'cuppingmumbai',
         port: 1433
     },
     "production": {
-        user: 'sa',
-        password: 'rti@123',
-        server: '10.43.9.175',
-        database: 'RTI_MVP',
+        user: 'root',
+        password: 'password',
+        server: '127.0.0.1',
+        database: 'cuppingmumbai',
         port: 1433
     }
 }

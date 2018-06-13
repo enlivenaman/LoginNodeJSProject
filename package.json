@@ -33,7 +33,8 @@
     "memory-cache": "^0.2.0",
     "moment-timezone": "^0.5.14",
     "morgan": "^1.9.0",
-    "mssql": "^4.1.0",
+    "mysql": "^2.15.0",
+    "otplib": "^9.0.0",
     "raven": "^2.4.1",
     "request": "^2.83.0",
     "sms-gateway-nodejs": "^0.1.0"
